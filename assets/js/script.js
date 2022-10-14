@@ -67,6 +67,7 @@ searchButton.addEventListener("click", function() {
 	submitLocation();
 });
 
+
 // searches for location
 var getLocation = function (location) {
 	const options = {
@@ -82,3 +83,4 @@ var getLocation = function (location) {
 		.then(response => console.log(response))
 		.catch(err => console.error(err));
   };
+
