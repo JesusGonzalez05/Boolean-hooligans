@@ -57,7 +57,6 @@ var getLocation = function (location) {
 			'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
 		}
 	};
-	
 	fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=' + location, options)
 		.then(response => response.json())
 		.then(response => console.log(response))
