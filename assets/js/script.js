@@ -26,3 +26,21 @@ fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
+
+	
+	// click handler for tiles
+	var randomTileEl = $("#random-tile")
+	var cheapestTileEl = $("#cheapest-tile")
+	var previousTileEl = $("#previous-tile")
+	
+	randomTileEl.on('click', function () {
+		alert('Hello Random');
+	  });
+
+	cheapestTileEl.on('click', function () {
+		alert('Hello cheapest');
+	  });
+
+	previousTileEl.on('click', function () {
+		alert('Hello previous');
+	  });
