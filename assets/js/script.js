@@ -12,6 +12,7 @@ fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
+
 // grabs sky scanner API
 
 const skyScannerOptions = {
@@ -26,3 +27,12 @@ fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
+
+// event listener for search bar
+var searchBar = document.querySelector(".search-bar");
+
+// Listen for a click event on search bar
+searchBar.addEventListener("click", function() {
+	console.log('clicked');
+});
+
