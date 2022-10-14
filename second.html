@@ -12,19 +12,46 @@
 </head>
 
 <body class="flex-column min-100-vh">
+  <!-- Navbar -->
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation" id="top">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="#">
+        <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
+        Nomadic Adcventures
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" class="navbar-menu is-active">
+      <div class="navbar-start">
+        
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div>
+            <a href="./index.html" class="btn-back">
+              Go Back
+            </a>
+          </div>
+      </div>
+    </div>
+  </nav>
+
   <header class="hero">
     <h1 class="app-title">Showing flights for: <span id="searched-flights"></span></h1>
     
-    <div>
-      <a href="./index.html" class="btn-back">
-        Go Back
-      </a>
-    </div>
+   
     
   </header>
-  
   <main>
-    <H2>Flights</H2>
     <div class="tile is-ancestor ">
       <div class="tile is-8 is-vertical is-parent">
         <div class="tile is-child box">
@@ -62,9 +89,24 @@
         </article>
       </div>
     </div>
-    
-      </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Nomadic Adventures</strong>
+        <p>Contact Us</p>
+      </p>
+      <div class="columns has-text-centered">
+        <div class="column">nomadicadventures@travel.com</div>
+        <div class="column"><a href="">Github</a></div>
+        <div class="column">(333)-333-3333</div>
+      </div>
+      <a href="#top"><h3 style="text-decoration: underline;">^ Back to Top ^</h3></a>
+      <p>&copy 2022 Boolean Hooligans</p>
+    </div>
+  </footer>
 
   
 
