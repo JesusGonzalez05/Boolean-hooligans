@@ -52,6 +52,7 @@
 // event listener for search bar
 var searchButton = document.querySelector(".search-bar");
 var locationInput = document.querySelector(".input");
+var searchedFligthsEl = document.querySelector('#searched-flights');
 
 
 // allows user to type in location
@@ -104,7 +105,7 @@ var inputLocation = function (Location) {
 	.then(response => recieveFlight(response[0].cityCode))
 	.catch(err => console.error(err));
 };
-// places city code into priceline search flights api to reder info such as: prices 
+// places city code into priceline and search flights
 
 var recieveFlight = function (cityCode) {
 
@@ -118,6 +119,23 @@ var recieveFlight = function (cityCode) {
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 		.then(response => response.json())
-		.then(response => console.log(response))
+		.then(response => flightPricing(response.segment[0], cityCode))
 		.catch(err => console.error(err));
+};
+// place city and flight info and grab price for associated flights
+var flightPricing = function (flights, city){
+
+	const options = {
+		method: 'GET',
+		headers: {
+			'X-RapidAPI-Key': '8663beff5emshbc88cb7c90f6122p185b9cjsncd1207a86433',
+			'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
+		}
+	};
+	
+	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
+		.then(response => response.json())
+		.then(response => console.log(response.pricedItinerary[0], flights, city))
+		.catch(err => console.error(err));
+
 };
