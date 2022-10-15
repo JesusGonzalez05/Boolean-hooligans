@@ -139,3 +139,12 @@ var flightPricing = function (flights, city){
 		.catch(err => console.error(err));
 
 };
+
+// Random Country
+let randomPlaceElement = document.getElementById("randomPlace")
+let randomIndex = Math.floor(Math.random() * countryList.length)
+let randomCountry = countryList[randomIndex]
+let randomCountry2 = countryList2[randomIndex]
+console.log(randomCountry)
+
+$("#randomPlace").text(randomCountry2)
