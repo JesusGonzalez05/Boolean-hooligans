@@ -52,7 +52,7 @@
 // event listener for search bar
 var searchButton = document.querySelector(".search-bar");
 var locationInput = document.querySelector(".input");
-var searchedFligthsEl = document.querySelector('#searched-flights');
+var searchedFlightsEl = document.querySelector('#searched-flights');
 
 
 // allows user to type in location
@@ -119,11 +119,11 @@ var recieveFlight = function (cityCode) {
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 		.then(response => response.json())
-		.then(response => flightPricing(response.segment[0], cityCode))
+		.then(response => pricedItinerary(response.segment[0], cityCode))
 		.catch(err => console.error(err));
 };
-// place city and flight info and grab price for associated flights
-var flightPricing = function (flights, city){
+// place city and flights info and grab price itinerary for all flights
+var pricedItinerary = function (flights, city){
 
 	const options = {
 		method: 'GET',
@@ -135,10 +135,60 @@ var flightPricing = function (flights, city){
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 		.then(response => response.json())
-		.then(response => console.log(response.pricedItinerary[0], flights, city))
+		.then(response => displayFlights(response.pricedItinerary[0].pricingInfo['baseFare'], flights, city))
 		.catch(err => console.error(err));
 
 };
+
+// create a function that will loop through all flights info and itinerary pricing and display on page
+var displayFlights = function (prices, flights, city) {
+
+
+	if (flights.length === 0) {
+	  searchedFlightsEl.textContent = 'No flights found.';
+	  return;
+	}
+  
+// searchedFlightsEl.textContent = 'Showing flights for: ' + city;
+  
+	for (var i = 0; i < flights.length; i++) {
+	  var flightArrival = flights[i].arrivalDateTime;
+	  var flightDeparture = flights[i].departDateTime;
+	  var flightDest = flights[i].destAirport;
+	  var flightNumber = flights[i].flightNumber;
+	  var flightOrigin = flights[i].origAirport;
+  
+	  var flightEl = document.createElement('div')
+	  flightEl.classList = 'tile is-child box'
+
+	  var flightArrivalEl = document.createElement('p');
+	  flightArrivalEl.classList = 'title';
+	  flightArrivalEl.textContent = flightArrival;
+
+	  var flightDepartureEl = document.createElement('p');
+	  flightArrivalEl.classList = 'title';
+	  flightArrivalEl.textContent = flightDeparture;
+
+	  flightEl.appendChild(flightArrivalEl + flightDepartureEl);
+
+	  var flightDestEl = document.createElement('p');
+	  flightDestEl.textContent = flightDest;
+
+	  flightEl.appendChild(flightDestEl);
+
+	  var flightNumberEl = document.createElement('p');
+	  flightNumberEl.textContent = flightDeparture;
+
+	  flightEl.appendChild(flightNumber);
+
+	  var flightOriginEl = document.createElement('p');
+	  flightOriginEl.textContent = flightDeparture;
+
+	  flightEl.appendChild(flightOrigin);
+	}
+
+	console.log (prices);
+  };
 
 // Random Country
 let randomPlaceElement = document.getElementById("randomPlace")
@@ -148,3 +198,4 @@ let randomCountry2 = countryList2[randomIndex]
 console.log(randomCountry)
 
 $("#randomPlace").text(randomCountry2)
+
