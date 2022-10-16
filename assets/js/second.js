@@ -32,47 +32,24 @@
 
 
 	
-	// click handler for tiles
-	var randomTileEl = $("#random-tile")
-	var cheapestTileEl = $("#cheapest-tile")
-	var previousTileEl = $("#previous-tile")
-	
-	randomTileEl.on('click', function () {
-		alert('Hello Random');
-	  });
 
-	cheapestTileEl.on('click', function () {
-		alert('Hello cheapest');
-	  });
-
-	previousTileEl.on('click', function () {
-		alert('Hello previous');
-	  });
-
-// event listener for search bar
-var searchButton = document.querySelector(".search-bar");
-var locationInput = document.querySelector(".input");
-var searchedFlightsEl = document.querySelector('#searched-flights');
 
 
 // allows user to type in location
-var submitLocation = function () {
-	var desiredLocation = locationInput.value.trim();
+var startSearch = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+	var desiredLocation = urlParams.get("search")
   
 	if (desiredLocation) {
+        getLocation(desiredLocation)
 	//   getLocation(desiredLocation);
-	window.location.href = `./second.html?search=${desiredLocation}`
+	
  
 	} else {
 	//   ask user to enter a valid city or location
 	}
 };
   
-// Listen for a click event on search bar
-searchButton.addEventListener("click", function() {
-	submitLocation();
-});
-
 
 // searches for location in booking api
 var getLocation = function (location) {
@@ -191,12 +168,4 @@ var displayFlights = function (prices, flights, city) {
 	console.log (prices);
   };
 
-// Random Country
-let randomPlaceElement = document.getElementById("randomPlace")
-let randomIndex = Math.floor(Math.random() * countryList.length)
-let randomCountry = countryList[randomIndex]
-let randomCountry2 = countryList2[randomIndex]
-console.log(randomCountry)
-
-$("#randomPlace").text(randomCountry2)
-
+  startSearch();
