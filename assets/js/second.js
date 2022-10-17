@@ -14,7 +14,7 @@ var startSearch = function () {
 };
   
 // searches for location in booking api
-var getLocation = function (location) {
+var getLocation = function (location, origin) {
   const options = {
     method: 'GET',
 	headers: {
@@ -25,7 +25,7 @@ var getLocation = function (location) {
 	
 	fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=' + location, options)
 	  .then(response => response.json())
-	  .then(response => inputLocation(response[1].city_name))
+	  .then(response => inputLocation(response[1].city_name, origin))
 	  .catch(err => console.error(err));
 	
 //   localStorage.setItem('previous-location', location);
@@ -43,12 +43,13 @@ var inputLocation = function (Location) {
 
   fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name='+ Location, options)
     .then(response => response.json())
-	.then(response => recieveFlight(response[0].cityCode))
+	.then(response => recieveFlight(response[0].cityCode, origin))
 	.catch(err => console.error(err));
 };
 
 // places city code into priceline and search flights
 var recieveFlight = function (cityCode) {
+  let origin = localStorage.getItem("departureLocation")
   const options = {
 	method: 'GET',
 	headers: {
@@ -57,9 +58,12 @@ var recieveFlight = function (cityCode) {
 	}
   };
 	
-	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
+	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=' + origin + '&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => pricedItinerary(response.segment, cityCode))
+	  .then(response => {
+      pricedItinerary(response.segment, cityCode)
+      console.log(origin);
+    })
 	  .catch(err => console.error(err));
 };
 

@@ -17,9 +17,10 @@ previousTileEl.on('click', function (event) {
 	// alert('Hello previous');
 });
 
-// event listener for search bar
-var searchButton = document.querySelector(".search-bar");
-var locationInput = document.querySelector(".input");
+// event listener for arrival search bar
+var searchButton = document.querySelector("#submit");
+var departureInput = document.querySelector("#departure");
+var locationInput = document.querySelector("#arrival");
   
 // Listen for a click event on search bar
 searchButton.addEventListener("click", function(event) {
@@ -30,12 +31,14 @@ searchButton.addEventListener("click", function(event) {
 // allows user to type in location
 var submitLocation = function () {
   var desiredLocation = locationInput.value.trim();
+  var desiredDeparture = departureInput.value.trim();
 
   localStorage.setItem('previous location', desiredLocation);
+  localStorage.setItem('departureLocation', desiredDeparture);
   
   if (desiredLocation) {
     window.location.href = `./second.html?search=${desiredLocation}`
- 	getLocation(desiredLocation);
+ 	getLocation(desiredLocation, desiredDeparture);
   } else {
 	 //   ask user to enter a valid city or location
   }
