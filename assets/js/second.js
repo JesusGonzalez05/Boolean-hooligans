@@ -99,6 +99,9 @@ var displayFlights = function (prices, flights, city) {
   var flightOriginEl = document.createElement('p')
   flightOriginEl.classList = 'title';
   flightOriginEl.textContent = flights[0].origAirport;
+  var departureIcon = document.createElement('i')
+  departureIcon.classList = "fa-solid fa-plane-departure";
+
 
   var flightDepartureEl = document.createElement('p');
   flightDepartureEl.classList = 'subtitle';
@@ -107,6 +110,8 @@ var displayFlights = function (prices, flights, city) {
   var flightDestEl = document.createElement('p')
   flightDestEl.classList = 'title';
   flightDestEl.textContent = flights[0].destAirport;
+  var arrivalIcon = document.createElement('i')
+  arrivalIcon.classList = "fa-solid fa-plane-arrival";
 	  
   var flightArrivalEl = document.createElement('p');
   flightArrivalEl.classList = 'subtitle';
@@ -127,6 +132,10 @@ var displayFlights = function (prices, flights, city) {
   flightEl.appendChild(flightArrivalEl);
   flightEl.appendChild(flightNumberEl);
   flightEl.appendChild(flightPriceEl);	  
+
+
+ flightOriginEl.appendChild(departureIcon);
+ flightDestEl.appendChild(arrivalIcon);
 // ]
 }
 startSearch();
