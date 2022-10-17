@@ -14,18 +14,18 @@ var startSearch = function () {
 };
   
 // searches for location in booking api
-var getLocation = function (location, origin) {
+var getLocation = function (location) {
   const options = {
     method: 'GET',
 	headers: {
-	'X-RapidAPI-Key': '8663beff5emshbc88cb7c90f6122p185b9cjsncd1207a86433',
+	'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
 	'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=' + location, options)
 	  .then(response => response.json())
-	  .then(response => inputLocation(response[1].city_name, origin))
+	  .then(response => inputLocation(response[1].city_name))
 	  .catch(err => console.error(err));
 	
 //   localStorage.setItem('previous-location', location);
@@ -36,14 +36,14 @@ var inputLocation = function (Location) {
   const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+		'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
 		'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 
   fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name='+ Location, options)
     .then(response => response.json())
-	.then(response => recieveFlight(response[0].cityCode, origin))
+	.then(response => recieveFlight(response[0].cityCode))
 	.catch(err => console.error(err));
 };
 
@@ -53,17 +53,14 @@ var recieveFlight = function (cityCode) {
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+	  'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=' + origin + '&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => {
-      pricedItinerary(response.segment, cityCode)
-      console.log(origin);
-    })
+	  .then(response => pricedItinerary(response.segment, cityCode))
 	  .catch(err => console.error(err));
 };
 
@@ -72,14 +69,14 @@ var pricedItinerary = function (flights, city){
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+	  'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => displayFlights(response.pricedItinerary, flights, city))
+	  .then(response => {displayFlights(response.pricedItinerary, flights, city)})
 	  .catch(err => console.error(err));
 
 };
