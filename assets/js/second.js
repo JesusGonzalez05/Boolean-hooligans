@@ -27,6 +27,8 @@ var getLocation = function (location) {
 	  .then(response => response.json())
 	  .then(response => inputLocation(response[1].city_name))
 	  .catch(err => console.error(err));
+	
+//   localStorage.setItem('previous-location', location);
 };
 
 // places location in priceline flights location api to look for city code
@@ -73,7 +75,7 @@ var pricedItinerary = function (flights, city){
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => displayFlights(response.pricedItinerary[0].pricingInfo['baseFare'], flights, city))
+	  .then(response => displayFlights(response.pricedItinerary, flights, city))
 	  .catch(err => console.error(err));
 
 };
@@ -113,12 +115,17 @@ var displayFlights = function (prices, flights, city) {
   flightNumberEl.classList = 'subtitle';
   flightNumberEl.textContent = 'Flight Number: ' + flights[0].flightNumber;
 
+  var flightPriceEl = document.createElement('p')
+  flightPriceEl.classlist = 'title'
+  flightPriceEl.textContent = '$' + prices[0].pricingInfo['baseFare']
+
   flightsContainerEl.appendChild(flightEl);
   flightEl.appendChild(flightOriginEl);
   flightEl.appendChild(flightDepartureEl);
   flightEl.appendChild(flightDestEl);
   flightEl.appendChild(flightArrivalEl);
-  flightEl.appendChild(flightNumberEl);	  
+  flightEl.appendChild(flightNumberEl);
+  flightEl.appendChild(flightPriceEl);	  
 // ]
 }
 startSearch();
