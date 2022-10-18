@@ -17,12 +17,58 @@ previousTileEl.on('click', function (event) {
 	// alert('Hello previous');
 });
 
+<<<<<<< Updated upstream
 // event listener for arrival search bar
 var searchButton = document.querySelector("#submit");
 var departureInput = document.querySelector("#departure");
 var locationInput = document.querySelector("#arrival");
+=======
+// event listener for search bar
+var searchButton = document.querySelector(".search-bar");
+var locationInput = document.querySelector(".input");
+
+// search bar auto complete
+var search_terms = ['New York', 'San Francisco', 'Houston', 'Las Vegas', 'Honolulu', 'Washington', 'Miami', 'Los Angeles', 'New Orleans', 'Orlando', 'Chicago', 'Georgia', 'Boston', 'Colorado', 'Seattle', 'San Antonio'];
+
+function autocompleteMatch(input) {
+  if (input == '') {
+    return [];
+  }
+  var reg = new RegExp(input)
+  return search_terms.filter(function(term) {
+	  if (term.match(reg)) {
+  	  return term;
+	  }
+  });
+};
+var res = document.getElementById("result");
+function showResults(val) {
+
+  res.innerHTML = '';
+  res.classList = 'has-background-white has-text-black';
+
+  var list = '';
+
+  var terms = autocompleteMatch(val);
+
+  for (i=0; i<terms.length; i++) {
+	list += '<li>' + terms[i] + '</li>';
+
+  }
+  res.innerHTML = '<ul>' + list + '</ul>';
+>>>>>>> Stashed changes
   
-// Listen for a click event on search bar
+  list.classList = 'has-text-black';
+};
+
+// event listener for autocomplete items 
+res.addEventListener ("click", function (event) {
+	var setValue = event.target.innerText;
+	res.innerHTML = setValue;
+	submitLocation(setValue);
+});
+  
+// event listener for search bar
 searchButton.addEventListener("click", function(event) {
   event.preventDefault();
   submitLocation();
