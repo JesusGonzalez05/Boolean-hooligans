@@ -68,6 +68,10 @@
               <p class="control is-expanded">
                 <input class="input" id="departure-date" type="text" placeholder="Date of Departure" required>
               </p>
+                <form class="control is-expanded" autocomplete="off"><input class="input" type="text" placeholder="Search for a City" name="q" id="q" onKeyUp="showResults(this.value)" />
+                  <div id="result"></div>
+                  </form>    
+              <!-- </p> -->
               <p class="control">
                 <a class="button is-info search-bar" id="submit">
                   Search
@@ -124,8 +128,6 @@
             <p>&copy 2022 Boolean Hooligans</p>
           </div>
         </footer>
-
-
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="./assets/js/countryList.js"></script>
