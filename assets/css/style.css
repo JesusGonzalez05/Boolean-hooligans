@@ -1,3 +1,19 @@
+.logoBurger {
+    display: flex;
+    width: 100%;
+}
+.navbar-brand{
+    width: 100%;
+}
+
+@media screen and (max-Width: 1024px){
+    .navbar-brand {
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+}
+
+
 .field {
     display: flex;
 }
