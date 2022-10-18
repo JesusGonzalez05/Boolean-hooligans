@@ -4,7 +4,11 @@ var cheapestTileEl = $("#cheapest-tile")
 var previousTileEl = $("#previous-tile")
 	
 randomTileEl.on('click', function () {
-  alert('Hello Random');
+	console.log("you clicked random tile")
+	// get text off card for random location
+	var text = document.querySelector("#randomPlace").textContent
+	// pass value to submitRandomLocation function
+	submitRandomLocation(text);
 });
 
 cheapestTileEl.on('click', function () {
@@ -16,6 +20,23 @@ previousTileEl.on('click', function (event) {
   submitPrevLocation();
 	// alert('Hello previous');
 });
+
+// allows user to submit random location
+var submitRandomLocation = function (randomLocation) {
+
+	if (randomLocation) {
+	  window.location.href = `./second.html?search=${randomLocation}`
+	   getLocation(randomLocation, desiredDeparture);
+	} else {
+	   //   ask user to enter a valid city or location
+	   alert("please enter a valid location")
+	}
+  }
+
+// event listener for arrival search bar
+var searchButton = document.querySelector("#submit");
+var departureInput = document.querySelector("#departure");
+var locationInput = document.querySelector("#arrival");
 
 // event listener for search bar
 var searchButton = document.querySelector(".search-bar");
@@ -116,7 +137,7 @@ var cheapestFlights = function() {
 	cheapFlight.append(destination)
 	cheapFlight.append(origin)
 	cheapFlight.append(price)
-
+}
 
 
 
@@ -160,7 +181,6 @@ var cheapestFlights = function() {
 			.catch(err => console.error(err));
 		})
 		.catch(err => console.error(err));
-}
 
 // datepicker
 $(function () {
@@ -174,7 +194,17 @@ $(function () {
 
 // cheapestFlights()
 
+// allows user to type in location
+var submitRandomLocation = function (randomLocation) {
 
+  if (randomLocation) {
+    window.location.href = `./second.html?search=${randomLocation}`
+ 	getLocation(randomLocation, desiredDeparture);
+  } else {
+	 //   ask user to enter a valid city or location
+	 alert("please enter a valid location")
+  }
+}
 
 // Burger Menu Button
 $(document).ready(function() {
@@ -188,3 +218,4 @@ $(document).ready(function() {
   
 	});
   });
+
