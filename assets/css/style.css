@@ -1,0 +1,27 @@
+.field {
+    display: flex;
+}
+
+
+.control i {
+    position: absolute;
+    color: #3e8ed0;
+    z-index: 1;
+    padding: 12px;
+    min-width: 40px;
+}
+
+
+.control:has(#arrival) {
+    width: 70%;
+}
+
+#departure {
+    padding-left: 40px;
+}
+
+#arrival {
+    padding-left: 40px;
+}
+
+
