@@ -55,7 +55,7 @@ var getLocation = function (location) {
   const options = {
     method: 'GET',
 	headers: {
-	'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+	'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
 	}
   };
@@ -73,7 +73,7 @@ var inputLocation = function (Location) {
   const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+		'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 		'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
@@ -90,7 +90,7 @@ var recieveFlight = function (cityCode) {
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
@@ -106,7 +106,7 @@ var pricedItinerary = function (flights, city){
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
