@@ -1,5 +1,6 @@
 var searchedFlightsEl = document.querySelector('#searched-flights');
 var flightsContainerEl = document.querySelector('#flights-container');
+var recommendedHotels = document.querySelector ('#rec-container')
 
 // allows user to type in location
 var startSearch = function () {
@@ -139,3 +140,40 @@ var displayFlights = function (prices, flights, city) {
 // ]
 }
 startSearch();
+
+
+
+// Hotel Recs
+var hotelRecs = function(response) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'dd725b9050mshd3130fdab545faep13532ajsn6a3bc71a0180',
+            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
+        }
+    };
+    
+    fetch(`https://priceline-com-provider.p.rapidapi.com/v1/hotels/locations?name=Atlanta&search_type=HOTEL`, options)
+        .then(response => response.json())
+        .then(response => displayHotels(response[0].itemName))
+        .catch(err => console.error(err));
+}
+
+var displayHotels = function(hotelName) {
+    var recsEl = document.createElement('div')
+    recsEl.classList = 'tile is-child box is-success"'
+    
+    var hotelRecsEl = document.createElement('p')
+    hotelRecsEl.classList = 'title ';
+    hotelRecsEl.innerHTML = hotelName;
+    
+    
+    recommendedHotels.appendChild(recsEl);
+    recsEl.appendChild(hotelRecsEl);
+    
+}
+
+hotelRecs();
+
+
+
