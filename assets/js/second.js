@@ -2,6 +2,40 @@ var searchedFlightsEl = document.querySelector('#searched-flights');
 var flightsContainerEl = document.querySelector('#flights-container');
 var recommendedHotels = document.querySelector ('#rec-container')
 
+// Hotel Recs
+var hotelRecs = function(city) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'dd725b9050mshd3130fdab545faep13532ajsn6a3bc71a0180',
+            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
+        }
+    };
+    
+    fetch(`https://priceline-com-provider.p.rapidapi.com/v1/hotels/locations?name=${city}&search_type=HOTEL`, options)
+        .then(response => response.json())
+        .then(response => displayHotels(response))
+        .catch(err => console.error(err));
+}
+
+var displayHotels = function(hotels) {
+    var recsEl = document.createElement('div')
+    recsEl.classList = 'tile is-child box is-success"'
+
+    for (let index = 0; index < hotels.length; index++) {
+        var hotelRecsEl = document.createElement('p')
+        hotelRecsEl.classList = 'title ';
+        hotelRecsEl.innerHTML = hotels[index].itemName;
+        
+        
+        recommendedHotels.appendChild(recsEl);
+        recsEl.appendChild(hotelRecsEl);
+    
+        
+    }
+    
+}
+
 // allows user to type in location
 var startSearch = function () {
   const urlParams = new URLSearchParams(window.location.search);
@@ -9,24 +43,26 @@ var startSearch = function () {
   
   if (desiredLocation) {
     getLocation(desiredLocation)
+    hotelRecs(desiredLocation);
   } else {
 	//   ask user to enter a valid city or location
 	}
+    
 };
   
 // searches for location in booking api
-var getLocation = function (location, origin) {
+var getLocation = function (location) {
   const options = {
     method: 'GET',
 	headers: {
-	'X-RapidAPI-Key': '8663beff5emshbc88cb7c90f6122p185b9cjsncd1207a86433',
+	'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=' + location, options)
 	  .then(response => response.json())
-	  .then(response => inputLocation(response[1].city_name, origin))
+	  .then(response => inputLocation(response[1].city_name))
 	  .catch(err => console.error(err));
 	
 //   localStorage.setItem('previous-location', location);
@@ -37,14 +73,14 @@ var inputLocation = function (Location) {
   const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+		'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 		'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 
   fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name='+ Location, options)
     .then(response => response.json())
-	.then(response => recieveFlight(response[0].cityCode, origin))
+	.then(response => recieveFlight(response[0].cityCode))
 	.catch(err => console.error(err));
 };
 
@@ -54,17 +90,14 @@ var recieveFlight = function (cityCode) {
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + cityCode + '&date_departure=2022-11-15&location_departure=' + origin + '&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => {
-      pricedItinerary(response.segment, cityCode)
-      console.log(origin);
-    })
+	  .then(response => pricedItinerary(response.segment, cityCode))
 	  .catch(err => console.error(err));
 };
 
@@ -74,14 +107,14 @@ var pricedItinerary = function (flights, city){
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': '37d0f0e1a2msha9631fa8067f732p1c0c51jsnea15de398a24',
+	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=' + departureDate + '&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
-	  .then(response => displayFlights(response.pricedItinerary, flights, city))
+	  .then(response => {displayFlights(response.pricedItinerary, flights, city)})
 	  .catch(err => console.error(err));
 
 };
@@ -104,6 +137,9 @@ var displayFlights = function (prices, flights, city) {
   var flightOriginEl = document.createElement('p')
   flightOriginEl.classList = 'title';
   flightOriginEl.textContent = flights[0].origAirport;
+  var departureIcon = document.createElement('i')
+  departureIcon.classList = "fa-solid fa-plane-departure";
+
 
   var flightDepartureEl = document.createElement('p');
   flightDepartureEl.classList = 'subtitle';
@@ -112,6 +148,8 @@ var displayFlights = function (prices, flights, city) {
   var flightDestEl = document.createElement('p')
   flightDestEl.classList = 'title';
   flightDestEl.textContent = flights[0].destAirport;
+  var arrivalIcon = document.createElement('i')
+  arrivalIcon.classList = "fa-solid fa-plane-arrival";
 	  
   var flightArrivalEl = document.createElement('p');
   flightArrivalEl.classList = 'subtitle';
@@ -132,43 +170,17 @@ var displayFlights = function (prices, flights, city) {
   flightEl.appendChild(flightArrivalEl);
   flightEl.appendChild(flightNumberEl);
   flightEl.appendChild(flightPriceEl);	  
+
+
+ flightOriginEl.appendChild(departureIcon);
+ flightDestEl.appendChild(arrivalIcon);
 // ]
 }
 startSearch();
 
 
 
-// Hotel Recs
-var hotelRecs = function(response) {
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': 'dd725b9050mshd3130fdab545faep13532ajsn6a3bc71a0180',
-            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
-        }
-    };
-    
-    fetch(`https://priceline-com-provider.p.rapidapi.com/v1/hotels/locations?name=Atlanta&search_type=HOTEL`, options)
-        .then(response => response.json())
-        .then(response => displayHotels(response[0].itemName))
-        .catch(err => console.error(err));
-}
 
-var displayHotels = function(hotelName) {
-    var recsEl = document.createElement('div')
-    recsEl.classList = 'tile is-child box is-success"'
-    
-    var hotelRecsEl = document.createElement('p')
-    hotelRecsEl.classList = 'title ';
-    hotelRecsEl.innerHTML = hotelName;
-    
-    
-    recommendedHotels.appendChild(recsEl);
-    recsEl.appendChild(hotelRecsEl);
-    
-}
-
-hotelRecs();
 
 
 
