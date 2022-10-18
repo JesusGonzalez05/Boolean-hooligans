@@ -12,42 +12,40 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar is-primary" role="navigation" aria-label="main navigation" id="top">
-        <div class="navbar-brand">
+      <div class="navbar-brand">
+        <div class="logoBurger">
           <a class="navbar-item" href="#">
             <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
             Nomadic Adcventures
           </a>
-      
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-      
-        <div id="navbarBasicExample" class="navbar-menu is-active">
-          <div class="navbar-start">
-            
-              </div>
+        <div class="navbar-menu" id="navMenu">
+          <!-- navbar-start, navbar-end... -->
+          <div class="navbar-menu txt-is-primary">
+            <div class="navbar-start">
+              <!-- navbar items -->
+            </div>
+            <div class="navbar-end">
+              <!-- navbar items -->
+                <a class="navbar-item">
+                  Random Place
+                </a>
+                <a class="navbar-item">
+                  Cheapest Flights
+                </a>
+                <a class="navbar-item">
+                  Previous Search
+                </a>                                           
             </div>
           </div>
-      
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <a class="navbar-item">
-                Random Place
-              </a>
-        
-              <a class="navbar-item">
-                Cheapest Flights
-              </a>
-        
-              <a class="navbar-item">
-                Previous Search
-              </a>
-          </div>
         </div>
-      </nav>
+      </div>
+    </nav>
 
       <!-- HERO -->
       <section class="hero is-large is-info has-text-centered">
@@ -68,6 +66,10 @@
               <p class="control is-expanded">
                 <input class="input" id="departure-date" type="text" placeholder="Date of Departure" required>
               </p>
+                <form class="control is-expanded" autocomplete="off"><input class="input" type="text" placeholder="Search for a City" name="q" id="q" onKeyUp="showResults(this.value)" />
+                  <div id="result"></div>
+                  </form>    
+              <!-- </p> -->
               <p class="control">
                 <a class="button is-info search-bar" id="submit">
                   Search
@@ -124,8 +126,6 @@
             <p>&copy 2022 Boolean Hooligans</p>
           </div>
         </footer>
-
-
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="./assets/js/countryList.js"></script>
