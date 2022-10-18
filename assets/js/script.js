@@ -17,12 +17,6 @@ previousTileEl.on('click', function (event) {
 	// alert('Hello previous');
 });
 
-<<<<<<< Updated upstream
-// event listener for arrival search bar
-var searchButton = document.querySelector("#submit");
-var departureInput = document.querySelector("#departure");
-var locationInput = document.querySelector("#arrival");
-=======
 // event listener for search bar
 var searchButton = document.querySelector(".search-bar");
 var locationInput = document.querySelector(".input");
@@ -56,7 +50,6 @@ function showResults(val) {
 
   }
   res.innerHTML = '<ul>' + list + '</ul>';
->>>>>>> Stashed changes
   
   list.classList = 'has-text-black';
 };
@@ -181,3 +174,17 @@ $(function () {
 
 // cheapestFlights()
 
+
+
+// Burger Menu Button
+$(document).ready(function() {
+
+	// Check for click events on the navbar burger icon
+	$(".navbar-burger").click(function() {
+  
+		// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+		$(".navbar-burger").toggleClass("is-active");
+		$(".navbar-menu").toggleClass("is-active");
+  
+	});
+  });
