@@ -123,6 +123,13 @@ var cheapestFlights = function() {
 		.catch(err => console.error(err));
 }
 
+// datepicker
+$(function () {
+	$('#departure-date').datepicker()
+  });
+
+
+
 // Uncomment in order to display cheapest flights tile content
 // Please comment out after testing in order to save API calls
 

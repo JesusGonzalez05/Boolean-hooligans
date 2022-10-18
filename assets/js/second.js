@@ -103,6 +103,7 @@ var recieveFlight = function (cityCode) {
 
 // place city and flights info and grab price itinerary for all flights
 var pricedItinerary = function (flights, city){
+  var departureDate = $("#departure-date").val()
   const options = {
 	method: 'GET',
 	headers: {
@@ -111,7 +112,7 @@ var pricedItinerary = function (flights, city){
 	}
   };
 	
-	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
+	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=' + departureDate + '&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
 	  .then(response => {displayFlights(response.pricedItinerary, flights, city)})
 	  .catch(err => console.error(err));
