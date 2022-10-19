@@ -34,7 +34,7 @@ var submitRandomLocation = function (randomLocation) {
   }
 
 // event listener for arrival search bar
-var searchButton = document.querySelector("#submit");
+
 var departureInput = document.querySelector("#departure");
 var locationInput = document.querySelector("#arrival");
 
@@ -85,6 +85,8 @@ res.addEventListener ("click", function (event) {
 // event listener for search bar
 searchButton.addEventListener("click", function(event) {
   event.preventDefault();
+  console.log($("#arrival").val())
+  localStorage.setItem('cityName', $("#arrival").val());
   submitLocation();
 });
 
@@ -99,6 +101,7 @@ var submitLocation = function () {
   if (desiredLocation) {
     window.location.href = `./second.html?search=${desiredLocation}`
  	getLocation(desiredLocation, desiredDeparture);
+	startSearch()
   } else {
 	 //   ask user to enter a valid city or location
   }
@@ -146,7 +149,7 @@ var cheapestFlights = function() {
 	const randomPlace = {
 		method: 'GET',
 		headers: {
-			'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+			'X-RapidAPI-Key': '  89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 			'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 		}
 	};
@@ -165,7 +168,7 @@ var cheapestFlights = function() {
 			method: 'GET',
 			headers: {
 				'X-Access-Token': 'a8314f1511ec1cb9c2b8906c4a6cf4fb',
-				'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+				'X-RapidAPI-Key': '   89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 				'X-RapidAPI-Host': 'travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com'
 			}
 		};
