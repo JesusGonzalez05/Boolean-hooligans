@@ -39,7 +39,7 @@ THEN I am greeted with the cheapest airline ticket.
 
 ## Project Links
 [Repo](https://github.com/JesusGonzalez05/Boolean-hooligans)
-[Deployed Site] ()
+[Deployed Site](https://jesusgonzalez05.github.io/Boolean-hooligans/)
 
 ## Screenshots
 ![NA-top-screenshot](https://user-images.githubusercontent.com/98119774/196731305-5cbb5ff9-fae8-48fc-ba0a-6a3441d0a7ca.jpg)
@@ -47,4 +47,4 @@ THEN I am greeted with the cheapest airline ticket.
 ![NA-bottom-screenshot](https://user-images.githubusercontent.com/98119774/196731418-4c915545-5b68-43f0-84b4-6c935af959ed.jpg)
 
 ## PowerPoint Presentation Link
-
+[PowerPoint](https://docs.google.com/presentation/d/1Fxp3Ep4P8EVfksLwH86rG53TKXJulc0hvNnXxsTakeU/edit#slide=id.p)
