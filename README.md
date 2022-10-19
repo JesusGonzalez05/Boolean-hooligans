@@ -19,9 +19,9 @@ WHEN I click on the cheapest flight home page tile.
 THEN I am greeted with the cheapest airline ticket.
 
 ## APIs In Use
-- [Priceline API] (https://rapidapi.com/tipsters/api/priceline-com-provider/)
-- [Booking.com API] (https://rapidapi.com/tipsters/api/booking-com/)
-- [Travel payouts API] (https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com)
+- [Priceline API](https://rapidapi.com/tipsters/api/priceline-com-provider/)
+- [Booking.com API](https://rapidapi.com/tipsters/api/booking-com/)
+- [Travel payouts API](https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com)
 
 ## Creators
 - Jesus Gonzalez
@@ -35,17 +35,16 @@ THEN I am greeted with the cheapest airline ticket.
 <img width="803" alt="Screen Shot 2022-10-13 at 12 54 41 PM" src="https://user-images.githubusercontent.com/98119774/196681043-49096890-8428-4404-9bd5-bc832c358267.png">
 
 ## KanBan Link 
-[Our KanBan] (https://github.com/users/JesusGonzalez05/projects/1)
+[Our KanBan](https://github.com/users/JesusGonzalez05/projects/1)
 
 ## Project Links
-[Repo] (https://github.com/JesusGonzalez05/Boolean-hooligans)
+[Repo](https://github.com/JesusGonzalez05/Boolean-hooligans)
 [Deployed Site] ()
 
 ## Screenshots
-<img width="1440" alt="Screen Shot 2022-10-19 at 7 46 21 AM" src="https://user-images.githubusercontent.com/98119774/196682827-9b18d7c3-84cd-43be-a255-c24812e4c116.png">
-
-
-
+![NA-top-screenshot](https://user-images.githubusercontent.com/98119774/196731305-5cbb5ff9-fae8-48fc-ba0a-6a3441d0a7ca.jpg)
+![NA-center-screenshot](https://user-images.githubusercontent.com/98119774/196731354-ab9c68d2-6e5a-4dd8-b2c5-e707c0c94797.jpg)
+![NA-bottom-screenshot](https://user-images.githubusercontent.com/98119774/196731418-4c915545-5b68-43f0-84b4-6c935af959ed.jpg)
 
 ## PowerPoint Presentation Link
 
