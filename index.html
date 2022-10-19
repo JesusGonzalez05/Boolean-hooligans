@@ -38,7 +38,7 @@
                 <a class="navbar-item" id="navbarBtn">
                   Cheapest Flights
                 </a>
-                <a class="navbar-item" id="navbarBtn">
+                <a class="navbar-item" id="navbarBtn" >
                   Previous Search
                 </a>                                           
             </div>
@@ -58,15 +58,16 @@
                 <input class="input" id="departure" type="text" placeholder="MCO" required>
               </p>
               <p class="control is-expanded">
-                <i class="fa-solid fa-plane-arrival"></i>
-                <input class="input" id="arrival" type="text" placeholder="Search for a City" required>
+                
+                <form class="control is-expanded"  autocomplete="off"><i class=" fa-solid fa-plane-arrival"></i><input id="arrival" class="input" type="text" placeholder="Search for a City" name="q" id="q" onKeyUp="showResults(this.value)" />
+                  <div id="result"></div>
+                  </form>  
               </p>
               <p class="control is-expanded">
-                <input class="input" id="departure-date" type="text" placeholder="Date of Departure" required>
+                <i class="fa-solid fa-calendar-days"></i>
+                <input class="input" id="departure-date" type="text" placeholder="Departure Date" required>
               </p>
-                <form class="control is-expanded" autocomplete="off"><input class="input" type="text" placeholder="Search for a City" name="q" id="q" onKeyUp="showResults(this.value)" />
-                  <div id="result"></div>
-                  </form>    
+  
               <!-- </p> -->
               <p class="control">
                 <a class="button is-info search-bar" id="submit">
@@ -90,7 +91,7 @@
               <div id = "cheapest-tile" class="tile is-parent">
                 <article class="tile is-child box">
                   <p class="title" id="tile-title">Cheapest flights</p>
-                  <p class="subtitle" id="cheap-tile"></p>
+                  <p class="subtitle" id="cheap-tile"><i class="fa-solid fa-plane"></i></p>
                   <div class="content">
                   </div>
                 </article>
@@ -99,7 +100,7 @@
                 <article class="tile is-child box">
                   <p class="title" id="tile-title">Previous Search</p>
                   <p class="subtitle" id="prev-tile">With some content</p>
-                  <div class="content">
+                  <div class="content" name="test">
                   </div>
                 </article>
               </div>

@@ -103,12 +103,15 @@ var submitLocation = function () {
 	 //   ask user to enter a valid city or location
   }
 };
-
+  var prevDesiredLocation = localStorage.getItem('departureLocation');
+  var prevSearchElement = document.getElementById("prev-tile")
+  prevSearchElement.textContent = prevDesiredLocation
 // allows user to visit their previous choice in location
 var submitPrevLocation = function () {
-  var prevDesiredLocation = localStorage.getItem('previous location');
+
   	
 	if (prevDesiredLocation) {
+
 	  window.location.href = `./second.html?search=${prevDesiredLocation}`
 	   getLocation(prevDesiredLocation);
 	} 
@@ -128,23 +131,22 @@ var cheapestFlights = function() {
 
 	let cheapTile = document.getElementById("cheap-tile");
 	let cheapFlight = document.createElement("div")
+	cheapFlight.classList.add("cheapFlight")
 	cheapTile.append(cheapFlight)
 
 	let destination = document.createElement("div")
-	let origin = document.createElement("div")
+	destination.classList.add("cheap-destination")
 	let price = document.createElement("div")
+	price.classList.add("cheap-price")
 
 	cheapFlight.append(destination)
-	cheapFlight.append(origin)
 	cheapFlight.append(price)
-}
-
 
 
 	const randomPlace = {
 		method: 'GET',
 		headers: {
-			'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+			'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 			'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 		}
 	};
@@ -156,14 +158,14 @@ var cheapestFlights = function() {
 			let citycode = response[randomCityIndex]
 			console.log(response);
 			console.log(citycode.id)
-			origin.textContent = citycode.itemName
+			destination.textContent = citycode.itemName
 
 			
 		const options = {
 			method: 'GET',
 			headers: {
 				'X-Access-Token': 'a8314f1511ec1cb9c2b8906c4a6cf4fb',
-				'X-RapidAPI-Key': '2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98',
+				'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
 				'X-RapidAPI-Host': 'travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com'
 			}
 		};
@@ -171,16 +173,23 @@ var cheapestFlights = function() {
 		fetch(`https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap?origin=MCO&page=1&currency=USD&destination=${citycode.id}`, options)
 			.then(response => response.json())
 			.then(response => {
+				console.log(response)
 				var keys = Object.keys(response.data);
-
+				$("#cheap-tile").append(price)
 				for (var i = 0; i < keys.length; i++) {
 					var val = response.data[keys[i]];
-					price.textContent = val[0].price
+					price.textContent = "$" + val[0].price
 				}
 			})
 			.catch(err => console.error(err));
 		})
 		.catch(err => console.error(err));
+
+}
+
+
+
+
 
 // datepicker
 $(function () {
@@ -192,7 +201,7 @@ $(function () {
 // Uncomment in order to display cheapest flights tile content
 // Please comment out after testing in order to save API calls
 
-// cheapestFlights()
+cheapestFlights()
 
 // allows user to type in location
 var submitRandomLocation = function (randomLocation) {
