@@ -1,68 +1,44 @@
 var searchedFlightsEl = document.querySelector('#searched-flights');
 var flightsContainerEl = document.querySelector('#flights-container');
-var recommendedHotels = document.querySelector ('#rec-container')
-
-// Hotel Recs
-var hotelRecs = function(city) {
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key': 'dd725b9050mshd3130fdab545faep13532ajsn6a3bc71a0180',
-            'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
-        }
-    };
-    
-    fetch(`https://priceline-com-provider.p.rapidapi.com/v1/hotels/locations?name=${city}&search_type=HOTEL`, options)
-        .then(response => response.json())
-        .then(response => displayHotels(response))
-        .catch(err => console.error(err));
-}
-
-var displayHotels = function(hotels) {
-    var recsEl = document.createElement('div')
-    recsEl.classList = 'tile is-child box is-success"'
-
-    for (let index = 0; index < hotels.length; index++) {
-        var hotelRecsEl = document.createElement('p')
-        hotelRecsEl.classList = 'title ';
-        hotelRecsEl.innerHTML = hotels[index].itemName;
-        
-        
-        recommendedHotels.appendChild(recsEl);
-        recsEl.appendChild(hotelRecsEl);
-    
-        
-    }
-    
-}
+var cityInput = document.getElementById("arrival")
 
 // allows user to type in location
-var startSearch = function () {
+var startSearch = function (e) {
+
+  
+  localStorage.setItem("City", cityInput)
   const urlParams = new URLSearchParams(window.location.search);
-  var desiredLocation = urlParams.get("search")
+  console.log(window.location);
+  console.log("URL Params:", urlParams.keys());
+  var desiredLocation = cityInput
+  console.log("Desired Location: " + desiredLocation);
+
+  console.log("City var:",cityInput);
   
   if (desiredLocation) {
     getLocation(desiredLocation)
-    hotelRecs(desiredLocation);
   } else {
 	//   ask user to enter a valid city or location
 	}
-    
 };
   
 // searches for location in booking api
 var getLocation = function (location) {
+  console.log("Location", location);
   const options = {
     method: 'GET',
 	headers: {
-	'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+	'X-RapidAPI-Key': '    89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 	'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
 	}
   };
 	
 	fetch('https://booking-com.p.rapidapi.com/v1/hotels/locations?locale=en-gb&name=' + location, options)
 	  .then(response => response.json())
-	  .then(response => inputLocation(response[1].city_name))
+	  .then(response => {
+      console.log("Location Response:",response);
+      console.log("Input Location argument:",response[1].city_name);
+      inputLocation(response[1].city_name)})
 	  .catch(err => console.error(err));
 	
 //   localStorage.setItem('previous-location', location);
@@ -73,14 +49,16 @@ var inputLocation = function (Location) {
   const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+		'X-RapidAPI-Key': '   89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 		'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 
   fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name='+ Location, options)
     .then(response => response.json())
-	.then(response => recieveFlight(response[0].cityCode))
+	.then(response => {
+    console.log(response);
+    recieveFlight(response[0].cityCode)})
 	.catch(err => console.error(err));
 };
 
@@ -90,7 +68,7 @@ var recieveFlight = function (cityCode) {
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+	  'X-RapidAPI-Key': '     89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
@@ -103,19 +81,18 @@ var recieveFlight = function (cityCode) {
 
 // place city and flights info and grab price itinerary for all flights
 var pricedItinerary = function (flights, city){
-  var departureDate = $("#departure-date").val()
   const options = {
 	method: 'GET',
 	headers: {
-	  'X-RapidAPI-Key': ' 4a5f6fee8fmsh4a330a6980ce7ffp15ff0cjsn2de94c5e60f0',
+	  'X-RapidAPI-Key': '     89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
 	  'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
 	}
   };
 	
-	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=' + "2022-10-23" + '&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=10', options)
+	fetch('https://priceline-com-provider.p.rapidapi.com/v1/flights/search?itinerary_type=ONE_WAY&class_type=ECO&location_arrival=' + city + '&date_departure=2022-11-15&location_departure=TPA&sort_order=PRICE&price_max=20000&number_of_passengers=1&duration_max=2051&price_min=100&date_departure_return=2022-11-16', options)
 	  .then(response => response.json())
 	  .then(response => {
-      console.log(response);
+      console.log(response.pricedItinerary, flights, city);
       displayFlights(response.pricedItinerary, flights, city)})
 	  .catch(err => console.error(err));
 
@@ -123,6 +100,7 @@ var pricedItinerary = function (flights, city){
 
 // create a function that will loop through all flights info and itinerary pricing and display on page
 var displayFlights = function (prices, flights, city) {
+  console.log("Flights:", flights);
   if (flights.length === 0) {
     searchedFlightsEl.textContent = 'No flights found.';
 	return;
@@ -130,7 +108,7 @@ var displayFlights = function (prices, flights, city) {
   
   searchedFlightsEl.textContent = 'Showing flights for: ' + city;
   
-//   for (var i = 0; i < flights.length; i++) {
+  for (var i = 0; i < flights.length; i++) {
 	
   
   var flightEl = document.createElement('div')
@@ -170,7 +148,7 @@ var displayFlights = function (prices, flights, city) {
   flightEl.appendChild(flightDepartureEl);
   flightEl.appendChild(flightDestEl);
   flightEl.appendChild(flightArrivalEl);
-  flightEl.appendChild(flightNumberEl);
+  flightEl.appendChild(flightNumberEl)
   flightEl.appendChild(flightPriceEl);	  
 
 
@@ -178,11 +156,24 @@ var displayFlights = function (prices, flights, city) {
  flightDestEl.appendChild(arrivalIcon);
 // ]
 }
-startSearch();
+
+
+
+}
 
 
 
 
 
 
+$(document).ready(function() {
 
+	// Check for click events on the navbar burger icon
+	$(".navbar-burger").click(function() {
+  
+		// Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+		$(".navbar-burger").toggleClass("is-active");
+		$(".navbar-menu").toggleClass("is-active");
+  
+	});
+  });
