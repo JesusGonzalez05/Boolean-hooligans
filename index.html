@@ -11,7 +11,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation" id="top">
+    <nav class="navbar" role="navigation" aria-label="main navigation" id="top">
       <div class="navbar-brand">
         <div class="logoBurger">
           <a class="navbar-item" href="#">
@@ -26,19 +26,19 @@
         </div>
         <div class="navbar-menu" id="navMenu">
           <!-- navbar-start, navbar-end... -->
-          <div class="navbar-menu txt-is-primary">
+          <div class="navbar-menu">
             <div class="navbar-start">
               <!-- navbar items -->
             </div>
             <div class="navbar-end">
               <!-- navbar items -->
-                <a class="navbar-item">
+                <a class="navbar-item" id="navbarBtn">
                   Random Place
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" id="navbarBtn">
                   Cheapest Flights
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" id="navbarBtn">
                   Previous Search
                 </a>                                           
             </div>
@@ -50,9 +50,7 @@
       <!-- HERO -->
       <section class="hero is-large is-info has-text-centered">
         <div class="hero-body" style="background-image: url('https://images.pexels.com/photos/692103/pexels-photo-692103.jpeg');   background-size: cover;">
-            <p class="title">
-              Nomadic Adventures
-            </p>
+            <p class="title" id="center-heading">Nomadic Adventures <i class="fa-solid fa-plane" id="header-icon"></i></p>
 
             <div class="field is-grouped">
               <p class="control is-expanded">
@@ -76,39 +74,41 @@
                 </a>
               </p>  
             </div>
+
+
+      <!-- tiles -->
+
+            <div class="tile is-ancestor" id="tile-section">
+              <div id = "random-tile" class="tile is-parent">
+                <article class="tile is-child box">
+                  <p class="title" id="tile-title">Random place</p>
+                  <p class="subtitle"  id="randomPlace">With some content</p>
+                  <div class="content">
+                  </div>
+                </article>
+              </div>
+              <div id = "cheapest-tile" class="tile is-parent">
+                <article class="tile is-child box">
+                  <p class="title" id="tile-title">Cheapest flights</p>
+                  <p class="subtitle" id="cheap-tile"></p>
+                  <div class="content">
+                  </div>
+                </article>
+              </div>
+              <div id = "previous-tile" class="tile is-parent">
+                <article class="tile is-child box">
+                  <p class="title" id="tile-title">Previous Search</p>
+                  <p class="subtitle" id="prev-tile">With some content</p>
+                  <div class="content">
+                  </div>
+                </article>
+              </div>
+            </div>
         </div>
       </section>
 
-      <!-- tiles -->
-        <div class="tile is-ancestor">
-          <div id = "random-tile" class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">Random place</p>
-              <p class="subtitle"  id="randomPlace">With some content</p>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-              </div>
-            </article>
-          </div>
-          <div id = "cheapest-tile" class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">Cheapest flights</p>
-              <p class="subtitle" id="cheap-tile"></p>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-              </div>
-            </article>
-          </div>
-          <div id = "previous-tile" class="tile is-parent">
-            <article class="tile is-child box">
-              <p class="title">Previous Search</p>
-              <p class="subtitle">With some content</p>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-              </div>
-            </article>
-          </div>
-        </div>
+
+
 
         <!-- Footer -->
         <footer class="footer">
