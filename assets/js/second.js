@@ -2,6 +2,73 @@ var searchedFlightsEl = document.querySelector('#searched-flights');
 var flightsContainerEl = document.querySelector('#flights-container');
 var recommendedHotels = document.querySelector ('#rec-container')
 
+// Cheapest Flights
+var cheapestFlights = function () {
+  let cheapTile = flightsContainerEl;
+  let cheapFlight = document.createElement("div");
+  cheapTile.append(cheapFlight);
+
+  let destination = document.createElement("div");
+  let origin = document.createElement("div");
+  let price = document.createElement("div");
+
+  cheapFlight.append(destination);
+  cheapFlight.append(origin);
+  cheapFlight.append(price);
+};
+
+const randomPlace = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": 'dd725b9050mshd3130fdab545faep13532ajsn6a3bc71a0180',
+    "X-RapidAPI-Host": "priceline-com-provider.p.rapidapi.com",
+  },
+};
+
+fetch(
+  `https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name=United%20States`,
+  randomPlace
+)
+  .then((response) => response.json())
+  .then((response) => {
+    let randomCityIndex = Math.floor(Math.random() * response.length);
+    let citycode = response[randomCityIndex];
+    console.log(response);
+    console.log(citycode.id);
+    origin.textContent = citycode.itemName;
+
+    const options = {
+      method: "GET",
+      headers: {
+        "X-Access-Token": "a8314f1511ec1cb9c2b8906c4a6cf4fb",
+        "X-RapidAPI-Key": "2f918a3dc9msh1f4883347966f63p1bf890jsna7079f2bda98",
+        "X-RapidAPI-Host":
+          "travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com",
+      },
+    };
+
+    fetch(
+      `https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap?origin=MCO&page=1&currency=USD&destination=${citycode.id}`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        
+        var keys = Object.keys(response.data);
+
+        for (var i = 0; i < keys.length; i++) {
+          var val = response.data[keys[i]];
+          price.textContent = val[0].price;
+        }
+      })
+      .catch((err) => console.error(err));
+  })
+  .catch((err) => console.error(err));
+
+// Uncomment in order to display cheapest flights tile content
+// Please comment out after testing in order to save API calls
+
+// cheapestFlights()
 // Hotel Recs
 var hotelRecs = function(city) {
     const options = {
@@ -40,13 +107,18 @@ var displayHotels = function(hotels) {
 var startSearch = function () {
   const urlParams = new URLSearchParams(window.location.search);
   var desiredLocation = urlParams.get("search")
-  
+  var showCheapestFlights = urlParams.get("showCheapestFlights")
   if (desiredLocation) {
     getLocation(desiredLocation)
     hotelRecs(desiredLocation);
   } else {
 	//   ask user to enter a valid city or location
 	}
+
+  if (showCheapestFlights) {
+    cheapestFlights()
+    
+  }
     
 };
   
@@ -177,6 +249,8 @@ var displayFlights = function (prices, flights, city) {
 // ]
 }
 startSearch();
+
+
 
 
 
