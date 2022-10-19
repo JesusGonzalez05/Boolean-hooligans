@@ -60,6 +60,10 @@ backdrop-filter: blur(8px);
 border: 1px solid rgba(255, 255, 255, 0.582);
 }
 
+#departure-date {
+    padding-left: 35px;
+}
+
 .input:focus {
     border: 2px solid var(--secondary-color);
     background: rgba(255, 255, 255, 0.781);
@@ -126,4 +130,53 @@ border: 1px solid rgba(255, 255, 255, 0.582);
     border-width: 1px 0 0 0;
     border-style: solid;
     border-color: #111;
+}
+
+
+
+
+#cheap-tile {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0px;
+    height: 200px;
+    justify-content: space-evenly;
+}
+
+#cheap-tile > *{
+    font-size: 20px;
+    text-align: center;
+}
+
+.cheap-price {
+    margin-left: 30%;
+    margin-right: 30%;
+    width:40%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+}
+
+@media screen and (max-Width: 631px) {
+    #center-heading {
+        font-size: 40px;
+        width: 80%;
+        margin-left: 9%;
+
+    }
+
+    .field.is-grouped {
+        flex-direction: column;
+        align-items: center;
+    }
+    .field.is-grouped > * {
+    margin-top: 10px;
+    width: 70%;
+    }
+
+    .control > .button {
+        width: 50%;
+        font-size: 25px;
+    }
 }
