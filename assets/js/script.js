@@ -21,92 +21,54 @@ previousTileEl.on('click', function (event) {
 });
 
 // allows user to submit random location
-var submitRandomLocation = function (randomLocation) {
+// var submitRandomLocation = function (randomLocation) {
 
-	if (randomLocation) {
-	  window.location.href = `./second.html?search=${randomLocation}`
-	   getLocation(randomLocation, desiredDeparture);
-	} else {
-	   //   ask user to enter a valid city or location
-	   alert("please enter a valid location")
-	}
-  }
+// 	if (randomLocation) {
+// 	  window.location.href = `./second.html?search=${randomLocation}`
+// 	   getLocation(randomLocation, desiredDeparture);
+// 	} else {
+// 	   //   ask user to enter a valid city or location
+// 	   alert("please enter a valid location")
+// 	}
+//   }
 
-// event listener for arrival search bar
-
+// assign input variables
 var departureInput = document.querySelector("#departure");
-var locationInput = document.querySelector("#arrival");
+var arrivalInput = document.querySelector("#arrival");
 
-// event listener for search bar
+// assign search btn varible
 var searchButton = document.querySelector(".search-bar");
-var locationInput = document.querySelector(".input");
 
-// search bar auto complete
-var search_terms = ['New York', 'San Francisco', 'Houston', 'Las Vegas', 'Honolulu', 'Washington', 'Miami', 'Los Angeles', 'New Orleans', 'Orlando', 'Chicago', 'Georgia', 'Boston', 'Colorado', 'Seattle', 'San Antonio'];
-
-function autocompleteMatch(input) {
-  if (input == '') {
-    return [];
-  }
-  var reg = new RegExp(input)
-  return search_terms.filter(function(term) {
-	  if (term.match(reg)) {
-  	  return term;
-	  }
-  });
-};
-var res = document.getElementById("result");
-function showResults(val) {
-
-  res.innerHTML = '';
-  res.classList = 'has-background-white has-text-black';
-
-  var list = '';
-
-  var terms = autocompleteMatch(val);
-
-  for (i=0; i<terms.length; i++) {
-	list += '<li>' + terms[i] + '</li>';
-
-  }
-  res.innerHTML = '<ul>' + list + '</ul>';
-  
-  list.classList = 'has-text-black';
-};
-
-// event listener for autocomplete items 
-res.addEventListener ("click", function (event) {
-	var setValue = event.target.innerText;
-	res.innerHTML = setValue;
-	submitLocation(setValue);
-});
   
 // event listener for search bar
 searchButton.addEventListener("click", function(event) {
   event.preventDefault();
-  console.log($("#arrival").val())
-  localStorage.setItem('cityName', $("#arrival").val());
   submitLocation();
 });
 
 // allows user to type in location
 var submitLocation = function () {
-  var desiredLocation = locationInput.value.trim();
+  var desiredLocation = arrivalInput.value.trim();
   var desiredDeparture = departureInput.value.trim();
 
   localStorage.setItem('previous location', desiredLocation);
   localStorage.setItem('departureLocation', desiredDeparture);
   
-  if (desiredLocation) {
-    window.location.href = `./second.html?search=${desiredLocation}`
- 	getLocation(desiredLocation, desiredDeparture);
-	startSearch()
-  } else {
+//   if (desiredLocation) {
+    // window.location.href = `./second.html?search=${desiredLocation}`
+ 	inputLocation(desiredLocation); 
+	//  desiredDeparture was passed in get location
+	// startSearch(desiredLocation);
+//   } else {
 	 //   ask user to enter a valid city or location
-  }
+//   }
 };
-  var prevDesiredLocation = localStorage.getItem('departureLocation');
-  var prevSearchElement = document.getElementById("prev-tile")
+  
+
+
+
+var prevDesiredLocation = localStorage.getItem('departureLocation');
+var prevSearchElement = document.getElementById("prev-tile")
   prevSearchElement.textContent = prevDesiredLocation
 // allows user to visit their previous choice in location
 var submitPrevLocation = function () {
@@ -119,13 +81,14 @@ var submitPrevLocation = function () {
 	} 
   };
 
-// Random Country
-let randomPlaceElement = document.getElementById("randomPlace")
-let randomIndex = Math.floor(Math.random() * countryList.length)
-let randomCountry = countryList[randomIndex]
-let randomCountry2 = countryList2[randomIndex]
+// // Random Country
+// let randomPlaceElement = document.getElementById("randomPlace")
+// let randomIndex = Math.floor(Math.random() * countryList.length)
+// let randomCountry = countryList[randomIndex]
+// let randomCountry2 = countryList2[randomIndex]
+// // console.log(randomCountry)
 
-$("#randomPlace").text(randomCountry2)
+// $("#randomPlace").text(randomCountry2)
 
 // Cheapest Flights
 var cheapestFlights = function() {
@@ -144,46 +107,49 @@ var cheapestFlights = function() {
 	cheapFlight.append(price)
 
 
-	const randomPlace = {
-		method: 'GET',
-		headers: {
-			'X-RapidAPI-Key': '  89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
-			'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
-		}
-	};
+// 	const randomPlace = {
+// 		method: 'GET',
+// 		headers: {
+// 			'X-RapidAPI-Key': '  89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
+// 			'X-RapidAPI-Host': 'priceline-com-provider.p.rapidapi.com'
+// 		}
+// 	};
 
-	fetch(`https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name=United%20States`, randomPlace)
-		.then(response => response.json())
-		.then(response => {
-			let randomCityIndex = Math.floor(Math.random() * response.length)
-			let citycode = response[randomCityIndex]
-			destination.textContent = citycode.itemName
+// 	fetch(`https://priceline-com-provider.p.rapidapi.com/v1/flights/locations?name=United%20States`, randomPlace)
+// 		.then(response => response.json())
+// 		.then(response => {
+// 			let randomCityIndex = Math.floor(Math.random() * response.length)
+// 			let citycode = response[randomCityIndex]
+// 			// console.log(response);
+// 			// console.log(citycode.id)
+// 			destination.textContent = citycode.itemName
 
 			
-		const options = {
-			method: 'GET',
-			headers: {
-				'X-Access-Token': 'a8314f1511ec1cb9c2b8906c4a6cf4fb',
-				'X-RapidAPI-Key': '   89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
-				'X-RapidAPI-Host': 'travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com'
-			}
-		};
+// 		const options = {
+// 			method: 'GET',
+// 			headers: {
+// 				'X-Access-Token': 'a8314f1511ec1cb9c2b8906c4a6cf4fb',
+// 				'X-RapidAPI-Key': '   89c9b663dbmshd869209e6d40f5ep11340fjsnebd044f6c87a',
+// 				'X-RapidAPI-Host': 'travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com'
+// 			}
+// 		};
 
-		fetch(`https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap?origin=MCO&page=1&currency=USD&destination=${citycode.id}`, options)
-			.then(response => response.json())
-			.then(response => {
-				var keys = Object.keys(response.data);
-				$("#cheap-tile").append(price)
-				for (var i = 0; i < keys.length; i++) {
-					var val = response.data[keys[i]];
-					price.textContent = "$" + val[0].price
-				}
-			})
-			.catch(err => console.error(err));
-		})
-		.catch(err => console.error(err));
+// 		fetch(`https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap?origin=MCO&page=1&currency=USD&destination=${citycode.id}`, options)
+// 			.then(response => response.json())
+// 			.then(response => {
+// 				// console.log(response)
+// 				var keys = Object.keys(response.data);
+// 				$("#cheap-tile").append(price)
+// 				for (var i = 0; i < keys.length; i++) {
+// 					var val = response.data[keys[i]];
+// 					price.textContent = "$" + val[0].price
+// 				}
+// 			})
+// 			.catch(err => console.error(err));
+// 		})
+// 		.catch(err => console.error(err));
 
-}
+// }
 
 
 
@@ -195,11 +161,11 @@ $(function () {
   });
 
 
-
+}
 // Uncomment in order to display cheapest flights tile content
 // Please comment out after testing in order to save API calls
 
-cheapestFlights()
+cheapestFlights();
 
 // allows user to type in location
 var submitRandomLocation = function (randomLocation) {
@@ -225,4 +191,3 @@ $(document).ready(function() {
   
 	});
   });
-
