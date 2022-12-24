@@ -4,7 +4,6 @@ var cheapestTileEl = $("#cheapest-tile")
 var previousTileEl = $("#previous-tile")
 	
 randomTileEl.on('click', function () {
-	console.log("you clicked random tile")
 	// get text off card for random location
 	var text = document.querySelector("#randomPlace").textContent
 	// pass value to submitRandomLocation function
@@ -125,7 +124,6 @@ let randomPlaceElement = document.getElementById("randomPlace")
 let randomIndex = Math.floor(Math.random() * countryList.length)
 let randomCountry = countryList[randomIndex]
 let randomCountry2 = countryList2[randomIndex]
-console.log(randomCountry)
 
 $("#randomPlace").text(randomCountry2)
 
@@ -159,8 +157,6 @@ var cheapestFlights = function() {
 		.then(response => {
 			let randomCityIndex = Math.floor(Math.random() * response.length)
 			let citycode = response[randomCityIndex]
-			console.log(response);
-			console.log(citycode.id)
 			destination.textContent = citycode.itemName
 
 			
@@ -176,7 +172,6 @@ var cheapestFlights = function() {
 		fetch(`https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap?origin=MCO&page=1&currency=USD&destination=${citycode.id}`, options)
 			.then(response => response.json())
 			.then(response => {
-				console.log(response)
 				var keys = Object.keys(response.data);
 				$("#cheap-tile").append(price)
 				for (var i = 0; i < keys.length; i++) {
